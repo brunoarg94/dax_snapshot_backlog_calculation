@@ -2,7 +2,7 @@
 
 ## Problem Statement
 
-In our Cyber Security risk management process, one of the key challenges was tracking how the backlog of open risks evolved over time. The team needed a dynamic and interactive way to visualize the number of open risks at any given quarter, regardless of when the report was generated. The goal was to enable better decision-making by understanding historical trends and identifying bottlenecks in risk remediation.  
+Recently, I faced an interesting challenge in tracking the evolution of open risks over time in a Cyber Security Risk Management process. The goal was to develop a dynamic and interactive visualization of the open risk backlog by leveraging periodic snapshots, allowing for historical trend analysis and better decision-making.
 
 ## Context
 
@@ -11,7 +11,9 @@ Our dataset consists of a list of risks with the following attributes:
 - risk_id: Unique identifier for each risk.  
 - risk_status: Either "Open" or "Closed".  
 - identify_date: Date when the risk was identified.  
-- remediate_date: Date when the risk was closed (if applicable).  
+- remediate_date: Date when the risk was closed (if applicable).
+
+This dataset contains simulated data and is a generic representation, focusing only on the essential fields required to solve the problem.
 
 The key requirement was to create a backlog metric that dynamically calculates the number of open risks at any given quarter-end date. The metric needed to work in a Power BI line chart visual displaying the backlog trend over time.  
 
@@ -31,8 +33,9 @@ CALCULATE(
     ALL(d_calendar),  -- Ignores any filters from the calendar table to ensure quarter-year analysis
     FILTER(
         f_risk_dataset,
-        (f_risk_dataset[risk_status] = "Open" && f_risk_dataset[identify_date] <= CurrentDate) ||  
-        (f_risk_dataset[risk_status] = "Closed" && f_risk_dataset[remediate_date] > CurrentDate && f_risk_dataset[identify_date] <= CurrentDate)
+        (f_risk_dataset[risk_status] = "Open" && f_risk_dataset[identify_date] <= CurrentDate) ||  -- Counts risks that are still open
+        (f_risk_dataset[risk_status] = "Closed" && f_risk_dataset[remediate_date] > CurrentDate && f_risk_dataset[identify_date] <= CurrentDate) 
+        -- Counts risks that were identified before and on the current quarter end date and closed after the current quarter end date
     )
 )
 ```
