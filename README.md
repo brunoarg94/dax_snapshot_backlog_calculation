@@ -3,24 +3,24 @@
 ## Problem Statement
 
 In our Cyber Security risk management process, one of the key challenges was tracking how the backlog of open risks evolved over time.  
-The risk management team needed a dynamic and interactive way to visualize the number of open risks at any given fiscal quarter, regardless of when the report was generated.  
+The team needed a dynamic and interactive way to visualize the number of open risks at any given quarter, regardless of when the report was generated.  
 The goal was to enable better decision-making by understanding historical trends and identifying bottlenecks in risk remediation.  
 
 ## Context
 
 Our dataset consists of a list of risks with the following attributes:
 
--**risk_id: Unique identifier for each risk.
--**risk_status: Either "Open" or "Closed".
--**identify_date: Date when the risk was identified.
--**remediate_date: Date when the risk was closed (if applicable).
+-risk_id: Unique identifier for each risk.  
+-risk_status: Either "Open" or "Closed".  
+-identify_date: Date when the risk was identified.  
+-remediate_date: Date when the risk was closed (if applicable).  
 
 The key requirement was to create a backlog metric that dynamically calculates the number of open risks at any given quarter-end date.  
 The metric needed to work in a Power BI line chart visual displaying the backlog trend over time.  
 
 ## Solution Using DAX
 
-To achieve this, we created a DAX measure in Power BI that calculates the number of open risks at any specific fiscal quarter end. The formula is as follows:
+To achieve this, I created a DAX measure in Power BI that calculates the number of open risks at any specific quarter end. The formula is as follows:
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -43,33 +43,31 @@ CALCULATE(
 
 ## Breakdown of the DAX Logic:
 
-CurrentDate = MAX(d_calendar[end_of_quarter]): This variable captures the latest fiscal quarter-end date in the current context.
+CurrentDate = MAX(d_calendar[end_of_quarter]): This variable captures the latest fiscal quarter-end date in the current context.  
 
-ALL(d_calendar): Ensures that the measure is calculated independently of any applied filters on the calendar table.
+ALL(d_calendar): Ensures that the measure is calculated independently of any applied filters on the calendar table.  
 
 ## Risk Filtering Logic:
 
-Includes risks identified on or before CurrentDate.
-
-Counts risks that remain "Open" at CurrentDate.
-
-Includes risks that were later "Closed" but were still open at CurrentDate (i.e., remediated after that date).
+-Includes risks identified on or before CurrentDate.  
+-Counts risks that remain "Open" at CurrentDate.  
+-Includes risks that were later "Closed" but were still open at CurrentDate (i.e., remediated after that date).  
 
 ## Snapshot Analysis Perspective
 
 This Power BI measure represents a snapshot analysis because it captures the state of open risks at specific points in time (i.e., the end of each fiscal quarter).
 
--**Point-in-Time Calculation: It does not track real-time changes but instead shows how many risks were open at each quarter-end.
--**Historical Trend Analysis: Even if risks are closed later, past snapshots remain unchanged, making this approach useful for understanding backlog evolution over time.
--**Fixed Reporting Perspective: The use of ALL(d_calendar) ensures that each quarter’s backlog is calculated independently, maintaining consistency for trend analysis.
+-Point-in-Time Calculation: It does not track real-time changes but instead shows how many risks were open at each quarter-end.
+-Historical Trend Analysis: Even if risks are closed later, past snapshots remain unchanged, making this approach useful for understanding backlog evolution over time.
+-Fixed Reporting Perspective: The use of ALL(d_calendar) ensures that each quarter’s backlog is calculated independently, maintaining consistency for trend analysis.
 
 ## Results and Insights
 
 This measure allows the risk management team to analyze the backlog trend over time using a line chart in Power BI. The insights help in:
 
--**Identifying periods where risk accumulation was high.
--**Understanding whether remediation efforts are keeping up with newly identified risks.
--**Making data-driven decisions to optimize risk resolution strategies.
+-Identifying periods where risk accumulation was high.
+-Understanding whether remediation efforts are keeping up with newly identified risks.
+-Making data-driven decisions to optimize risk resolution strategies.
 
 ## Conclusion
 
