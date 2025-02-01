@@ -1,22 +1,19 @@
-# Analyzing Open Risk Backlog Over Time with Power BI and DAX
+# Analyzing open risk backlog over Time with Power BI and DAX
 
 ## Problem Statement
 
-In our Cyber Security risk management process, one of the key challenges was tracking how the backlog of open risks evolved over time.  
-The team needed a dynamic and interactive way to visualize the number of open risks at any given quarter, regardless of when the report was generated.  
-The goal was to enable better decision-making by understanding historical trends and identifying bottlenecks in risk remediation.  
+In our Cyber Security risk management process, one of the key challenges was tracking how the backlog of open risks evolved over time. The team needed a dynamic and interactive way to visualize the number of open risks at any given quarter, regardless of when the report was generated. The goal was to enable better decision-making by understanding historical trends and identifying bottlenecks in risk remediation.  
 
 ## Context
 
 Our dataset consists of a list of risks with the following attributes:
 
--risk_id: Unique identifier for each risk.  
--risk_status: Either "Open" or "Closed".  
--identify_date: Date when the risk was identified.  
--remediate_date: Date when the risk was closed (if applicable).  
+- risk_id: Unique identifier for each risk.  
+- risk_status: Either "Open" or "Closed".  
+- identify_date: Date when the risk was identified.  
+- remediate_date: Date when the risk was closed (if applicable).  
 
-The key requirement was to create a backlog metric that dynamically calculates the number of open risks at any given quarter-end date.  
-The metric needed to work in a Power BI line chart visual displaying the backlog trend over time.  
+The key requirement was to create a backlog metric that dynamically calculates the number of open risks at any given quarter-end date. The metric needed to work in a Power BI line chart visual displaying the backlog trend over time.  
 
 ## Solution Using DAX
 
@@ -49,9 +46,9 @@ ALL(d_calendar): Ensures that the measure is calculated independently of any app
 
 ## Risk Filtering Logic:
 
--Includes risks identified on or before CurrentDate.  
--Counts risks that remain "Open" at CurrentDate.  
--Includes risks that were later "Closed" but were still open at CurrentDate (i.e., remediated after that date).  
+- Includes risks identified on or before CurrentDate.  
+- Counts risks that remain "Open" at CurrentDate.  
+- Includes risks that were later "Closed" but were still open at CurrentDate (i.e., remediated after that date).  
 
 ## Snapshot Analysis Perspective
 
@@ -65,9 +62,9 @@ This Power BI measure represents a snapshot analysis because it captures the sta
 
 This measure allows the risk management team to analyze the backlog trend over time using a line chart in Power BI. The insights help in:
 
--Identifying periods where risk accumulation was high.
--Understanding whether remediation efforts are keeping up with newly identified risks.
--Making data-driven decisions to optimize risk resolution strategies.
+- Identifying periods where risk accumulation was high.
+- Understanding whether remediation efforts are keeping up with newly identified risks.
+- Making data-driven decisions to optimize risk resolution strategies.
 
 ## Conclusion
 
