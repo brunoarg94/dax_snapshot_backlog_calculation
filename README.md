@@ -57,9 +57,9 @@ ALL(d_calendar): Ensures that the measure is calculated independently of any app
 
 This Power BI measure represents a snapshot analysis because it captures the state of open risks at specific points in time (i.e., the end of each fiscal quarter).
 
--Point-in-Time Calculation: It does not track real-time changes but instead shows how many risks were open at each quarter-end.
--Historical Trend Analysis: Even if risks are closed later, past snapshots remain unchanged, making this approach useful for understanding backlog evolution over time.
--Fixed Reporting Perspective: The use of ALL(d_calendar) ensures that each quarter’s backlog is calculated independently, maintaining consistency for trend analysis.
+- Point-in-Time Calculation: It does not track real-time changes but instead shows how many risks were open at each quarter-end.  
+- Historical Trend Analysis: Even if risks are closed later, past snapshots remain unchanged, making this approach useful for understanding backlog evolution over time.  
+- Fixed Reporting Perspective: The use of ALL(d_calendar) ensures that each quarter’s backlog is calculated independently, maintaining consistency for trend analysis.  
 
 ## Results and Insights
 
