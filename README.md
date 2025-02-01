@@ -1,4 +1,4 @@
-# Analyzing open risk backlog over Time with Power BI and DAX
+# Analyzing open risk backlog over time with Power BI and DAX
 
 ## Problem Statement
 
